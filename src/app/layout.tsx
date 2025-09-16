@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon1.svg", type: "image/svg+xml" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }, // opcional para telas retina
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" }, // opcional fallback
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
   },
 };
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Fallback para browsers que não leem metadata */}
+        {/* fallback para browsers que não leem metadata */}
         <link rel="icon" href="/favicon1.svg" type="image/svg+xml" />
       </head>
       <body
@@ -57,24 +57,24 @@ export default function RootLayout({
             </div>
 
             <nav className="hidden md:flex items-center gap-6 text-sm text-[#09192f]/80">
-              <a href="/#produtos" className="hover:text-[#004048]">
+              <Link href="/#produtos" className="hover:text-[#004048]">
                 Produtos
-              </a>
+              </Link>
               <Link href="/quemsomos" className="hover:text-[#004048]">
                 Quem Somos
               </Link>
-              <a href="/#cotacao" className="hover:text-[#004048]">
+              <Link href="/#cotacao" className="hover:text-[#004048]">
                 Cotação
-              </a>
-              <a href="/#contato" className="hover:text-[#004048]">
+              </Link>
+              <Link href="/#contato" className="hover:text-[#004048]">
                 Contato
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#cotacao"
                 className="rounded-2xl bg-[#004048] text-white px-4 py-2 font-medium hover:opacity-90"
               >
                 Solicitar Cotação
-              </a>
+              </Link>
             </nav>
           </div>
         </header>

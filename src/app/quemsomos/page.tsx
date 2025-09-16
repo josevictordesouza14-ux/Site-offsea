@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Shield, Target, Star, Users, ChevronRight } from "lucide-react";
 
@@ -59,19 +60,19 @@ export default function Page() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
+              <Link
                 href="/#produtos"
                 className="rounded-2xl border border-[#004048] text-[#004048] px-4 py-2 font-medium hover:bg-[#004048]/10"
               >
                 Ver produtos
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#cotacao"
                 className="rounded-2xl bg-[#004048] text-white px-4 py-2 font-medium inline-flex items-center hover:opacity-90"
               >
                 Solicitar cotação
                 <ChevronRight className="ml-1 size-4" />
-              </a>
+              </Link>
             </div>
           </motion.div>
 
@@ -79,7 +80,6 @@ export default function Page() {
             {...fadeIn(0.1)}
             className="relative rounded-2xl overflow-hidden border border-[#004048]/20"
           >
-            {/* Troque a imagem abaixo por uma foto da empresa/equipe se quiser */}
             <Image
               src="/hero3.svg"
               alt="OffSea - Estrutura"
@@ -106,7 +106,7 @@ export default function Page() {
               </div>
               <p className="mt-2 text-[#09192f]/80">
                 Fornecer produtos e soluções que elevem a segurança e a produtividade
-                dos nossos clientes, com atendimento rápido e suporte especializado —
+                dos nossos clientes, com atendimento rápido e suporte especializado — 
                 mantendo suas operações em ritmo contínuo.
               </p>
             </motion.div>
@@ -172,13 +172,13 @@ export default function Page() {
             Envie sua lista e receba nossa proposta com rapidez e transparência.
           </motion.p>
           <motion.div {...fadeIn(0.1)} className="mt-6">
-            <a
+            <Link
               href="/#cotacao"
               className="inline-flex items-center rounded-2xl bg-[#004048] text-white px-5 py-3 font-medium hover:opacity-90"
             >
               Solicitar cotação
               <ChevronRight className="ml-1 size-4" />
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>

@@ -16,7 +16,6 @@ const fadeIn = (delay = 0) => ({
 export default function Page() {
   return (
     <div className="min-h-screen bg-white text-[#09192f]">
-     
       {/* HERO alternando imagens */}
       <section className="relative overflow-hidden h-[80vh] flex items-center">
         {["/hero1.svg", "/hero2.svg"].map((img, i) => (
@@ -44,20 +43,20 @@ export default function Page() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
+              <Link
                 href="#cotacao"
                 className="rounded-2xl bg-[#004048] text-white px-4 py-2 font-medium inline-flex items-center group hover:opacity-90"
               >
                 Pedir Cotação
                 <ChevronRight className="ml-1 size-4" />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#produtos"
                 className="rounded-2xl border border-white text-white px-4 py-2 font-medium hover:bg-white/10"
               >
                 Ver produtos
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -148,7 +147,6 @@ export default function Page() {
                 const company = String(data.get("company") || "");
                 const message = String(data.get("message") || "");
 
-                // Ajuste o número abaixo se necessário (DDI+DDD+número, só dígitos).
                 const phone = "5521975396623";
 
                 const text = encodeURIComponent(
