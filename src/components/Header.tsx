@@ -1,41 +1,33 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Menu, X, Mail, Phone } from "lucide-react";
-import { company } from "@/lib/company";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
-  useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
-    function dismiss(e: KeyboardEvent) { if (e.key === "Escape") setOpen(false); }
+    if (!open) return;
+    function dismiss(event: KeyboardEvent) {
+      if (event.key === "Escape") { setOpen(false); toggle.current?.focus(); }
+    }
     window.addEventListener("keydown", dismiss);
     return () => window.removeEventListener("keydown", dismiss);
-  }, []);
+  }, [open]);
   return <>
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    <div className="utility-bar"><div className="container utility-inner">
-      <span>SUPRIMENTOS INDUSTRIAIS · OFFSHORE & ONSHORE</span>
-      <div><a href={`mailto:${company.email}`}><Mail size={13} aria-hidden="true" />{company.email}</a><a href={`tel:${company.phoneHref}`}><Phone size={13} aria-hidden="true" />{company.phone}</a></div>
-    </div></div>
     <header className="header">
       <div className="container nav-inner">
-        <Link href="/" className="brand" aria-label="OFFSEA — página inicial"><img src="/images/offsea-logo.svg" alt="OFFSEA" width="164" height="55" /></Link>
-        <nav className="desktop-nav" aria-label="Navegação principal">
-          <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>Início</Link>
-          <Link href="/quemsomos" aria-current={pathname === "/quemsomos" ? "page" : undefined}>Quem somos</Link>
-          <Link href="/#produtos">Produtos</Link>
-          <Link href="/#contato">Contato</Link>
-        </nav>
-        <Link className="button button-navy nav-quote" href="/#cotacao">Solicitar cotação</Link>
-        <button className="menu-toggle" aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
+        <Link href="/" className="brand" aria-label="OFFSEA — página inicial" onClick={() => setOpen(false)}><Image src="/images/offsea-logo.svg" alt="OFFSEA" width={150} height={50} /></Link>
+        <nav className="desktop-nav" aria-label="Navegação principal"><Link href="/#produtos">Nossas linhas</Link><Link href="/quemsomos" aria-current={pathname === "/quemsomos" ? "page" : undefined}>Quem somos</Link></nav>
+        <Link className="nav-contact" href="/#cotacao">Vamos conversar<ArrowUpRight size={17} aria-hidden="true" /></Link>
+        <button ref={toggle} className="menu-toggle" aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>{open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
       </div>
-      {open && <nav id="mobile-nav" className="mobile-nav" aria-label="Navegação no celular" onClick={() => setOpen(false)}>
-        <Link href="/">Início</Link><Link href="/quemsomos">Quem somos</Link><Link href="/#produtos">Produtos</Link><Link href="/#contato">Contato</Link><Link className="button button-navy" href="/#cotacao">Solicitar cotação</Link>
-      </nav>}
+      <nav id="mobile-nav" className="mobile-nav" aria-label="Navegação no celular" hidden={!open} onClick={() => setOpen(false)}><Link href="/">Início</Link><Link href="/#produtos">Nossas linhas</Link><Link href="/quemsomos">Quem somos</Link><Link href="/#cotacao">Vamos conversar<ArrowUpRight size={17} aria-hidden="true" /></Link></nav>
     </header>
   </>;
 }
